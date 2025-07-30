@@ -146,11 +146,11 @@ export interface Checkpoint {
   Base: Base
 }
 
-export interface Response {
+export interface ResponseResult {
   id: string
   message: string
 }
-export interface FormatResponse {
+export interface Response {
   id: string
 }
 export interface SendMessageParams {
@@ -178,5 +178,5 @@ export abstract class HyMatrixBase {
   abstract getProcesses (accid: string): Promise<string[]>
   abstract balanceOf (accid?: string): Promise<string>
   abstract stakeOf (accid?: string): Promise<string>
-  abstract sendMessage (params: SendMessageParams): Promise<FormatResponse>
+  abstract sendMessage (params: SendMessageParams): Promise<Response>
 }

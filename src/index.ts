@@ -8,7 +8,7 @@ import {
   HMInfo,
   HyMatrixBase,
   SendMessageParams,
-  FormatResponse,
+  Response,
   HMNodeMap,
   HMNode,
   MessageItemMap
@@ -69,18 +69,12 @@ class HyMatrix extends HyMatrixBase {
     return result
   }
 
-  async getMessageByNonce (
-    processId: string,
-    nonce: number
-  ): Promise<BundleItem> {
+  async getMessageByNonce (processId: string, nonce: number): Promise<BundleItem> {
     const result = await getMessageByNonce(this._apiHost, processId, nonce)
     return result
   }
 
-  async getAssignByNonce (
-    processId: string,
-    nonce: number
-  ): Promise<BundleItem> {
+  async getAssignByNonce (processId: string, nonce: number): Promise<BundleItem> {
     const result = await getAssignByNonce(this._apiHost, processId, nonce)
     return result
   }
@@ -124,7 +118,7 @@ class HyMatrix extends HyMatrixBase {
     return result
   }
 
-  async sendMessage (params: SendMessageParams): Promise<FormatResponse> {
+  async sendMessage (params: SendMessageParams): Promise<Response> {
     const info = await this.info()
     const defaultBaseMessage = getDefaultBase(BaseType.TypeMessage, info)
     const msg = {

@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import isObject from 'lodash/isObject'
 import isString from 'lodash/isString'
 import { stringify as qsStringify } from 'query-string'
-import { MessageItem, BundleItem, Response, HMInfo, HMNodeMap, HMNode, MessageItemMap } from '../types/index'
+import { MessageItem, BundleItem, ResponseResult, HMInfo, HMNodeMap, HMNode, MessageItemMap } from '../types/index'
 import { toBN } from '../utils'
 
 // `validateStatus` defines whether to resolve or reject the promise for a given
@@ -178,7 +178,7 @@ export const getStakeOfByAccid = async (apiHost: string, accid: string): Promise
   return toBN(result.data).toString()
 }
 
-export const send = async (apiHost: string, data: ArrayBuffer): Promise<Response> => {
+export const send = async (apiHost: string, data: ArrayBuffer): Promise<ResponseResult> => {
   const url = `${apiHost}/`
   const result = await sendRequest({
     ...rConfig,
