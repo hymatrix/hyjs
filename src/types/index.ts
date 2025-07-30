@@ -1,7 +1,5 @@
 import { JWKInterface } from 'arweave/node/lib/wallet'
-import { InjectedEthereumSigner } from 'arseeding-arbundles/src/signing'
-
-export { InjectedEthereumSigner }
+import { Web3Provider } from '@ethersproject/providers'
 export type ArJWK = JWKInterface | 'use_wallet'
 type EthereumPrivateKey = `0x${string}`
 
@@ -11,7 +9,7 @@ interface DefaultConfig {
 }
 // 三种互斥 signer 类型
 type SignerConfig =
-  | { signer: InjectedEthereumSigner, privateKey?: never, arJWK?: never }
+  | { signer: Web3Provider, privateKey?: never, arJWK?: never }
   | { privateKey: EthereumPrivateKey, signer?: never, arJWK?: never }
   | { arJWK: ArJWK, signer?: never, privateKey?: never }
 export type Config = DefaultConfig & Partial<SignerConfig>

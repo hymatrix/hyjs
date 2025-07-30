@@ -8,6 +8,7 @@ import EthereumSigner from 'arseeding-arbundles/src/signing/chains/ethereumSigne
 import { createData, DataItem } from 'arseeding-arbundles'
 import isString from 'lodash/isString'
 import { mergeTags } from '../utils'
+import { Web3Provider } from '@ethersproject/providers'
 
 export const checkArPermissions = async (
   permissions: string[] | string
@@ -34,6 +35,7 @@ export const checkArPermissions = async (
   }
 }
 
+let ethPublicKey = ''
 export const createAndSignItem = async (config: Config, params: SendMessageParams): Promise<ArrayBuffer> => {
   const sdkTimestampTag: Tag[] = [
     {
@@ -43,13 +45,22 @@ export const createAndSignItem = async (config: Config, params: SendMessageParam
   ]
   const { tags, processId: target, data = '' } = params
   const finalTags = mergeTags(sdkTimestampTag, tags)
-  if ((config?.signer != null || config.signer !== undefined) && config.signer instanceof InjectedEthereumSigner) {
-    await config.signer.setPublicKey()
-    const dataItem = createData(data, config.signer, {
+  if ((config?.signer != null || config.signer !== undefined) && config.signer instanceof Web3Provider) {
+    const signer = new InjectedEthereumSigner(config.signer)
+    if (ethPublicKey !== '') {
+      signer.setPublicKey = async function () {
+        this.publicKey = Buffer.from(ethPublicKey, 'hex')
+      }
+      await signer.setPublicKey()
+    } else {
+      await signer.setPublicKey()
+      ethPublicKey = signer.publicKey.toString('hex')
+    }
+    const dataItem = createData(data, signer, {
       tags: finalTags,
       target
     })
-    await dataItem.sign(config.signer)
+    await dataItem.sign(signer)
     return dataItem.getRaw()
   } else if ((config.arJWK != null || config.arJWK !== undefined) && config.arJWK === 'use_wallet') {
     await checkArPermissions([
