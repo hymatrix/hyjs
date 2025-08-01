@@ -7,7 +7,6 @@
 ## 使用要求
 
 - `Node Version >= 16` 推荐使用 [`nvm`](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows)（windows） 来管理 Node 版本。
-- 推荐使用 [ethers.js @5.4.1](https://docs.ethers.org/v5/)
 # 目录
 ## 基本查询类
 
@@ -33,11 +32,11 @@
 
 ```bash
 
-npm install hyjs-test ethers@5.4.1
+npm install hyjs-test
 
 # 或
 
-yarn add hyjs-test ethers@5.4.1
+yarn add hyjs-test
 ```
 
 ## 使用方式
@@ -48,7 +47,7 @@ yarn add hyjs-test ethers@5.4.1
 > `arJWK`: arweave JWKInterface JSON 文件，参考 [arweave Docs - Sample JWK](https://docs.arweave.org/developers/arweave-node-server/http-api#sample-jwk)
 - 👉 [Web环境](#web-环境)
 
-> `signer`: ethereum 签名， 通过 `new Web3Provider(window.ethereum)` 创建。
+> `signer`: ethereum 签名， 通过 `new Web3Provider(window.ethereum)` 创建。可通过 `hy-js` 导出 `Web3Provider`。
 
 > `arJWK`: `use_wallet`: [arweave-js](https://github.com/ArweaveTeam/arweave-js) 也支持在浏览器端使用 `'use_wallet'` 作为 jwk 参数，来使用 ArConnect 获取 arweave 钱包地址，以及进行 arweave 转账、签名。详见 [arweave-js Search · use_wallet](https://github.com/ArweaveTeam/arweave-js/search?q=use_wallet), 在 Web 端，使用 `'use_wallet'` 代表的 ArConnect，更安全。
 
@@ -118,7 +117,7 @@ main()
 
 ```ts
 import HyMatrix from 'hyjs-test'
-import { Web3Provider } from '@ethersproject/providers'
+import { Web3Provider } from 'hyjs-test/cjs/types'
 
 // window.arweaveWallet.getActiveAddress()
 const accid = await window.arweaveWallet.getActiveAddress()
@@ -539,7 +538,7 @@ const hyMatrix = new HyMatrix({
 })
 
 // web
-import { Web3Provider } from '@ethersproject/providers'
+import { Web3Provider } from 'hyjs-test/cjs/types'
 const ethereumPrivateKey = '0x...' // 0x + 64位私钥， 共66位
 // or
 const arJWK = 'use_wallet'

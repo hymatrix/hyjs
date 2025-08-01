@@ -9,7 +9,7 @@ import { createData, DataItem } from 'arseeding-arbundles'
 import isString from 'lodash/isString'
 import { mergeTags } from '../utils'
 import { Web3Provider } from '@ethersproject/providers'
-
+import { utils } from 'ethers'
 export const checkArPermissions = async (
   permissions: string[] | string
 ): Promise<void> => {
@@ -48,14 +48,22 @@ export const createAndSignItem = async (config: Config, params: SendMessageParam
   if ((config?.signer != null || config.signer !== undefined) && config.signer instanceof Web3Provider) {
     const signer = new InjectedEthereumSigner(config.signer)
     if (ethPublicKey !== '') {
-      signer.setPublicKey = async function () {
-        this.publicKey = Buffer.from(ethPublicKey, 'hex')
+      const signerAddr = await config.signer.getSigner().getAddress()
+      const publicKeyAddr = utils.computeAddress('0x' + ethPublicKey)
+      if (signerAddr.toLowerCase() !== publicKeyAddr.toLowerCase()) {
+        await signer.setPublicKey()
+        ethPublicKey = signer.publicKey.toString('hex')
+      } else {
+        signer.setPublicKey = async function () {
+          this.publicKey = Buffer.from(ethPublicKey, 'hex')
+        }
+        await signer.setPublicKey()
       }
-      await signer.setPublicKey()
     } else {
       await signer.setPublicKey()
       ethPublicKey = signer.publicKey.toString('hex')
     }
+
     const dataItem = createData(data, signer, {
       tags: finalTags,
       target

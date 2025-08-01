@@ -2222,7 +2222,7 @@ arraybuffer.prototype.slice@^1.0.4:
     get-intrinsic "^1.2.6"
     is-array-buffer "^3.0.4"
 
-arseeding-arbundles@^0.6.27:
+arseeding-arbundles@^0.6.29:
   version "0.6.29"
   resolved "https://registry.yarnpkg.com/arseeding-arbundles/-/arseeding-arbundles-0.6.29.tgz#439a92fd7430d7e5a74b13316c369caa822aaeb5"
   integrity sha512-914QnAVWYStN0Kg6B6K5WlxqZnJbtjbLSJHSm0mruBzweZpZ1mdN2e74Ge5mjbtJkK+Hq9LTiwXrIcys9DeVpQ==
@@ -2329,9 +2329,9 @@ available-typed-arrays@^1.0.7:
   dependencies:
     possible-typed-array-names "^1.0.0"
 
-"avsc@https://github.com/Bundlr-Network/avsc#csp-fixes":
+"avsc@git+https://github.com/Bundlr-Network/avsc.git#csp-fixes":
   version "5.4.7"
-  resolved "https://github.com/Bundlr-Network/avsc#a730cc8018b79e114b6a3381bbb57760a24c6cef"
+  resolved "git+https://github.com/Bundlr-Network/avsc.git#a730cc8018b79e114b6a3381bbb57760a24c6cef"
 
 axios@^0.21.1, axios@^0.21.3:
   version "0.21.4"

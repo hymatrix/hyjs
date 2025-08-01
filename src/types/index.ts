@@ -1,12 +1,13 @@
 import { JWKInterface } from 'arweave/node/lib/wallet'
 import { Web3Provider } from '@ethersproject/providers'
 export type ArJWK = JWKInterface | 'use_wallet'
-type EthereumPrivateKey = `0x${string}`
+export type EthereumPrivateKey = `0x${string}`
 
 interface DefaultConfig {
   debug?: boolean
   accid?: string
 }
+export { Web3Provider }
 // 三种互斥 signer 类型
 type SignerConfig =
   | { signer: Web3Provider, privateKey?: never, arJWK?: never }
