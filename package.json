@@ -1,5 +1,5 @@
 {
-  "name": "hyjs-test",
+  "name": "hymatrix",
   "version": "0.1.5",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -8,7 +8,7 @@
     "esm",
     "umd"
   ],
-  "description": "first hyjs sdk",
+  "description": "first hymatrix-js sdk",
   "repository": "https://github.com/hymatrix/hyjs.git",
   "keywords": [    
     "ethereum",
