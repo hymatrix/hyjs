@@ -1,6 +1,6 @@
 {
-  "name": "hymatrix",
-  "version": "0.1.5",
+  "name": "hymatrix-js",
+  "version": "0.0.1",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
   "files": [

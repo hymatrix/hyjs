@@ -2,7 +2,7 @@
 
 > 一个用于与 HyMatrix 去中心化计算与消息协议交互的 JavaScript/TypeScript SDK，支持 Ethereum、Arweave、AO 网络。
 
-[![NPM version](https://img.shields.io/npm/v/hyjs.svg)](https://www.npmjs.com/package/hyjs)  
+[![NPM version](https://img.shields.io/npm/v/hymatrix-js.svg)](https://www.npmjs.com/package/hymatrix-js)  
 
 ## 使用要求
 
@@ -32,11 +32,11 @@
 
 ```bash
 
-npm install hyjs
+npm install hymatrix-js
 
 # 或
 
-yarn add hyjs
+yarn add hymatrix-js
 ```
 
 ## 使用方式
@@ -56,7 +56,7 @@ yarn add hyjs
 ### Node 环境
 
 ```ts
-import HyMatrix from 'hyjs'
+import HyMatrix from 'hymatrix-js'
 import arweaveKeyFile from 'arweave-key-file.json'
 
 const accid  = '...' // ethereumAddress or ArweaveAddress
@@ -116,8 +116,8 @@ main()
 ### Web 环境
 
 ```ts
-import HyMatrix from 'hyjs'
-import { Web3Provider } from 'hyjs/cjs/types'
+import HyMatrix from 'hymatrix-js'
+import { Web3Provider } from 'hymatrix-js/cjs/types'
 
 // window.arweaveWallet.getActiveAddress()
 const accid = await window.arweaveWallet.getActiveAddress()
@@ -538,7 +538,7 @@ const hyMatrix = new HyMatrix({
 })
 
 // web
-import { Web3Provider } from 'hyjs/cjs/types'
+import { Web3Provider } from 'hymatrix-js/cjs/types'
 const ethereumPrivateKey = '0x...' // 0x + 64位私钥， 共66位
 // or
 const arJWK = 'use_wallet'
