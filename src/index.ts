@@ -32,7 +32,7 @@ import {
 } from './api/api'
 import { createAndSignItem } from './lib'
 import { getDefaultBase, mergeTags, baseToTags } from './utils'
-
+export * from './types'
 class HyMatrix extends HyMatrixBase {
   constructor (config?: Config) {
     super()

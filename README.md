@@ -1,4 +1,4 @@
-# hymatrix
+# Hymatrix-JS
 
 > 一个用于与 HyMatrix 去中心化计算与消息协议交互的 JavaScript/TypeScript SDK，支持 Ethereum、Arweave、AO 网络。
 
@@ -47,7 +47,7 @@ yarn add hymatrix-js
 > `arJWK`: arweave JWKInterface JSON 文件，参考 [arweave Docs - Sample JWK](https://docs.arweave.org/developers/arweave-node-server/http-api#sample-jwk)
 - 👉 [Web环境](#web-环境)
 
-> `signer`: ethereum 签名， 通过 `new Web3Provider(window.ethereum)` 创建。可通过 `hy-js` 导出 `Web3Provider`。
+> `signer`: ethereum 签名， 通过 `new Web3Provider(window.ethereum)` 创建。可通过 `hymatrix-js` 导出 `Web3Provider`。
 
 > `arJWK`: `use_wallet`: [arweave-js](https://github.com/ArweaveTeam/arweave-js) 也支持在浏览器端使用 `'use_wallet'` 作为 jwk 参数，来使用 ArConnect 获取 arweave 钱包地址，以及进行 arweave 转账、签名。详见 [arweave-js Search · use_wallet](https://github.com/ArweaveTeam/arweave-js/search?q=use_wallet), 在 Web 端，使用 `'use_wallet'` 代表的 ArConnect，更安全。
 
@@ -116,8 +116,7 @@ main()
 ### Web 环境
 
 ```ts
-import HyMatrix from 'hymatrix-js'
-import { Web3Provider } from 'hymatrix-js/cjs/types'
+import HyMatrix,{ Web3Provider } from 'hymatrix-js'
 
 // window.arweaveWallet.getActiveAddress()
 const accid = await window.arweaveWallet.getActiveAddress()
@@ -538,7 +537,7 @@ const hyMatrix = new HyMatrix({
 })
 
 // web
-import { Web3Provider } from 'hymatrix-js/cjs/types'
+import { Web3Provider } from 'hymatrix-js'
 const ethereumPrivateKey = '0x...' // 0x + 64位私钥， 共66位
 // or
 const arJWK = 'use_wallet'
