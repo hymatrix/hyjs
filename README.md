@@ -81,7 +81,7 @@ hyMatrix2.balanceOf().then(console.log)
 const ethereumPrivateKey = '0x...' // 0x + 64位私钥， 共66位
 const hyMatrix3 = new HyMatrix({
  privateKey: ethereumPrivateKey,
- url: '' // https:.... // 若指定 url 发起交易，请确保 processId 和 url 节点保持一致。可通过  getNodesByProcess 函数获取
+ url: '' // https:.... // 可通过  getNodesByProcess 函数获取, 其他接口也会在指定 `url` 下进行请求。
 })
 
 // or
@@ -89,27 +89,40 @@ const hyMatrix3 = new HyMatrix({
 // arweave key-file json
 const hyMatrix3 = new HyMatrix({
  arJWK: arweaveKeyFile,
- url: '' // https:.... // 若指定 url 发起交易，请确保 processId 和 url 节点保持一致。可通过  getNodesByProcess 函数获取
+ url: '' // https:.... // 可通过  getNodesByProcess 函数获取, 其他接口也会在指定 `url` 下进行请求。
 })
 
-// 转账：以 hmAR 为例
+// ok，完整代码以 hmAR Token 为例， 发起一笔转账 ！！！
+
+// 1. 确认转账的 processId // 转账：以 hmAR 为例
 const processId = 'GuuH1wCOBatG-JoKu42NkJMC7Cx-rjD8F5EEICLTNP8'
+// 2. 确认 收款地址和金额
 const tags = [
   { name: 'Action', value: 'Transfer' },
   { name: 'Recipient', value: '收款地址' },
   { name: 'Quantity', value: '100' }
 ]
+// 3. 通过 processId 获取到指定的 url 节点，可成功 发起交易，// 若已知 url 可省略，减少请求。
+const urls = await new HyMatrix().getNodesByProcess(processId)
+// 4. 创建 HyMatrix 实例
+const hyMatrix4 = new HyMatrix({
+  arJWK: arweaveKeyFile,
+  url: urls[0]?.URL // 后续 hyMatrix4 的请求 将同意从 该参数的 url 下进行。
+})
 async function main() {
+  // 5 创建参数结构
   const params = {
       tags,
       processId,
       data: '' // 可选, 默认为空字符串
   }
-  const result = await hyMatrix3.sendMessage(params)
+  // 6. 发起交易
+  const result = await hyMatrix4.sendMessage(params)
   console.log(result.id)
 
-  // wait/ 稍等片刻
-  const result2 = await hyMatrix3.getResult(result.id)
+  // wait.../ 稍等片刻后...
+  // 7. 查询交易记录 // tip: 在指定 url 节点发起的请求。
+  const result2 = await hyMatrix4.getResult(result.id)
   console.log(result2)
 }
 
@@ -142,7 +155,6 @@ hyMatrix2.balanceOf().then(console.log)
 // arweaveWallet : 'use_wallet' = window.arweaveWallet
 const hyMatrix3 = new HyMatrix({
  arJWK: 'use_wallet',
- url: '' // https:.... // 若指定 url 发起交易，请确保 processId 和 url 节点保持一致。可通过  getNodesByProcess 函数获取
 })
 
 // or
@@ -153,26 +165,39 @@ const provider = new Web3Provider(window.ethereum)
 // ethereumWallet
 const hyMatrix3 = new HyMatrix({
  signer: provider,
- url: '' // https:.... // 若指定 url 发起交易，请确保 processId 和 url 节点保持一致。可通过  getNodesByProcess 函数获取
 })
 
-// 以 hmAR 为例
+// ok，完整代码以 hmAR Token 为例， 发起一笔转账 ！！！
+
+// 1. 确认转账的 processId // 转账：以 hmAR 为例
 const processId = 'GuuH1wCOBatG-JoKu42NkJMC7Cx-rjD8F5EEICLTNP8'
+// 2. 确认 收款地址和金额
 const tags = [
   { name: 'Action', value: 'Transfer' },
   { name: 'Recipient', value: '收款地址' },
   { name: 'Quantity', value: '100' }
 ]
+// 3. 通过 processId 获取到指定的 url 节点，可成功 发起交易，// 若已知 url 可省略，减少请求。
+const urls = await new HyMatrix().getNodesByProcess(processId)
+// 4. 创建 HyMatrix 实例
+const hyMatrix4 = new HyMatrix({
+  arJWK: 'use_wallet',
+  url: urls[0]?.URL // 后续 hyMatrix4 的请求 将同意从 该参数的 url 下进行。
+})
 async function main() {
+  // 5 创建参数结构
   const params = {
       tags,
       processId,
       data: '' // 可选, 默认为空字符串
   }
-  const result = await hyMatrix3.sendMessage(params)
+  // 6. 发起交易
+  const result = await hyMatrix4.sendMessage(params)
   console.log(result.id)
-  // wait/ 稍等片刻
-  const result2 = await hyMatrix3.getResult(result.id)
+
+  // wait.../ 稍等片刻后...
+  // 7. 查询交易记录 // tip: 在指定 url 节点发起的请求。
+  const result2 = await hyMatrix4.getResult(result.id)
   console.log(result2)
 }
 
