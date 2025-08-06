@@ -198,7 +198,7 @@ async function main() {
       processId,
       data: '' // 可选, 默认为空字符串
   }
-  
+
   // 6. 发起交易
   const result = await hyMatrix4.sendMessage(params)
   console.log(result.id)
@@ -589,24 +589,40 @@ const hyMatrix = new HyMatrix({
 // 相关文档 https://eips.ethereum.org/EIPS/eip-6963#announce-and-request-events
 
 
+// 1. 确认转账的 processId // 转账：以 hmAR 为例
 const processId = 'GuuH1wCOBatG-JoKu42NkJMC7Cx-rjD8F5EEICLTNP8'
+
+// 2. 确认 收款地址和金额
 const tags = [
   { name: 'Action', value: 'Transfer' },
   { name: 'Recipient', value: '收款地址' },
   { name: 'Quantity', value: '100' }
 ]
 
+// 3. 通过 processId 获取到指定的 url 节点，可成功 发起交易，// 若已知 url 可省略，减少请求。
+const urls = await new HyMatrix().getNodesByProcess(processId)
+
+// 4. 创建 HyMatrix 实例
+const hyMatrix4 = new HyMatrix({
+  arJWK: 'use_wallet',
+  url: urls[0]?.URL // 后续 hyMatrix4 的请求 将同意从 该参数的 url 下进行。
+})
+
 async function main() {
+  // 5 创建参数结构
   const params = {
       tags,
       processId,
       data: '' // 可选, 默认为空字符串
   }
-  const result = await hyMatrix3.sendMessage(params)
-  // { "id": "vDDowE3NrNKfAyZtfEGaTLrkOhr3DDB2D_-Vs22Z8ig"}
-  console.log(result.id)
-  // wait/ 稍等片刻
-  const result2 = await hyMatrix3.getResult(result.id)
+  
+  // 6. 发起交易
+  const result = await hyMatrix4.sendMessage(params)
+  console.log(result.id)   // { "id": "vDDowE3NrNKfAyZtfEGaTLrkOhr3DDB2D_-Vs22Z8ig"}
+
+  // wait.../ 稍等片刻后...
+  // 7. 查询交易记录 // tip: 在指定 url 节点发起的请求。
+  const result2 = await hyMatrix4.getResult(result.id)
   console.log(result2)
 }
 
