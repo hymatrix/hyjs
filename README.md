@@ -51,6 +51,7 @@ yarn add hymatrix-js
 
 > `arJWK`: `use_wallet`: [arweave-js](https://github.com/ArweaveTeam/arweave-js) 也支持在浏览器端使用 `'use_wallet'` 作为 jwk 参数，来使用 ArConnect 获取 arweave 钱包地址，以及进行 arweave 转账、签名。详见 [arweave-js Search · use_wallet](https://github.com/ArweaveTeam/arweave-js/search?q=use_wallet), 在 Web 端，使用 `'use_wallet'` 代表的 ArConnect，更安全。
 
+> `url`: 可省略 [getNodesByProcess](#getnodesbyprocessprocessid) 查询步骤，直接发起交易。其他接口也会在指定 `url` 下进行请求。
 ---
 
 ### Node 环境
@@ -79,14 +80,16 @@ hyMatrix2.balanceOf().then(console.log)
 // eth 私钥
 const ethereumPrivateKey = '0x...' // 0x + 64位私钥， 共66位
 const hyMatrix3 = new HyMatrix({
- privateKey: ethereumPrivateKey
+ privateKey: ethereumPrivateKey,
+ url: '' // https:.... // 若指定 url 发起交易，请确保 processId 和 url 节点保持一致。可通过  getNodesByProcess 函数获取
 })
 
 // or
 
 // arweave key-file json
 const hyMatrix3 = new HyMatrix({
- arJWK: arweaveKeyFile
+ arJWK: arweaveKeyFile,
+ url: '' // https:.... // 若指定 url 发起交易，请确保 processId 和 url 节点保持一致。可通过  getNodesByProcess 函数获取
 })
 
 // 转账：以 hmAR 为例
@@ -138,7 +141,8 @@ hyMatrix2.balanceOf().then(console.log)
 
 // arweaveWallet : 'use_wallet' = window.arweaveWallet
 const hyMatrix3 = new HyMatrix({
- arJWK: 'use_wallet'
+ arJWK: 'use_wallet',
+ url: '' // https:.... // 若指定 url 发起交易，请确保 processId 和 url 节点保持一致。可通过  getNodesByProcess 函数获取
 })
 
 // or
@@ -148,7 +152,8 @@ const hyMatrix3 = new HyMatrix({
 const provider = new Web3Provider(window.ethereum)
 // ethereumWallet
 const hyMatrix3 = new HyMatrix({
- signer: provider
+ signer: provider,
+ url: '' // https:.... // 若指定 url 发起交易，请确保 processId 和 url 节点保持一致。可通过  getNodesByProcess 函数获取
 })
 
 // 以 hmAR 为例
