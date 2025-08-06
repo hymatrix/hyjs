@@ -41,7 +41,7 @@ class HyMatrix extends HyMatrixBase {
       debug: config?.debug ?? false,
       accid: config?.accid ?? ''
     }
-    this._apiHost = getHyMatrixHost(this._config.debug)
+    this._apiHost = ((config?.url) != null && config.url !== undefined && config.url !== '') ? config.url : getHyMatrixHost(this._config.debug)
   }
 
   private readonly _apiHost: string

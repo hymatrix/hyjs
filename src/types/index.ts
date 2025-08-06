@@ -6,6 +6,7 @@ export type EthereumPrivateKey = `0x${string}`
 interface DefaultConfig {
   debug?: boolean
   accid?: string
+  url?: string
 }
 export { Web3Provider }
 // 三种互斥 signer 类型
