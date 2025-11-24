@@ -15,7 +15,7 @@ export default [
     input: "./src/index.ts", // 入口文件
     output: [ 
       {
-        name: 'Everpay', //浏览器引入的全局变量名称
+        name: 'Hymatrix', //浏览器引入的全局变量名称
         file: 'umd/index.umd.js', //输出文件
         format: 'umd', //输出格式
         exports: 'named', //导出的是全局变量命名方式

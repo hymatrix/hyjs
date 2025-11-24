@@ -11,7 +11,7 @@
 ## 基本查询类
 
 * GET [/info](#info)
-* GET [/result/{messageId}](#getresultmsgid)
+* GET [/result/{processId}/{messageId}](#getresultmsgid)
 * GET [/results/{processId}?sort&limit](#getresultsprocessid-limit)
 * GET [/message/{messageId}](#getmessagemsgid)
 * GET [/messageByNonce/{processId}/{nonce}](#getmessagebynonceprocessid-nonce)
@@ -244,18 +244,19 @@ hyMatrix.info().then(console.log)
 ```
 
 
-### getResult(msgId)
+### getResult(pid, msgId)
 
 | 方法             | 描述             | 参数            | 返回值                  |
 |------------------|------------------|------------------|--------------------------|
-| `getResult(msgId)` | 根据消息ID查询结果 | `msgId: string` | `MessageItem`  |
+| `getResult(pid, msgId)` | 根据消息ID查询结果 | `processId: string`, `msgId: string` | `MessageItem`  |
 
 ```ts
 const hyMatrix = new HyMatrix({
   debug: true
 })
+const processId = ''
 const messageId = 'vDDowE3NrNKfAyZtfEGaTLrkOhr3DDB2D_-Vs22Z8ig'
-hyMatrix.getResult(messageId).then(console.log)
+hyMatrix.getResult(processId, messageId).then(console.log)
 
 // {
 //   "Nonce": "14",

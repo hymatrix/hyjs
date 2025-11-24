@@ -54,8 +54,8 @@ export const getInfo = async (apiHost: string): Promise<HMInfo> => {
   })
   return result.data
 }
-export const getResult = async (apiHost: string, msgId: string): Promise<MessageItem> => {
-  const url = `${apiHost}/result/${msgId}`
+export const getResult = async (apiHost: string,processId: string, msgId: string): Promise<MessageItem> => {
+  const url = `${apiHost}/result/${processId}/${msgId}`
   const result = await sendRequest({
     ...rConfig,
     url,

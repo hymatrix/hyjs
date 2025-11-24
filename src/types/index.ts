@@ -168,7 +168,7 @@ export interface SendMessageParams {
 
 export abstract class HyMatrixBase {
   abstract info (): Promise<HMInfo>
-  abstract getResult (msgId: string): Promise<MessageItem>
+  abstract getResult (pid: string,msgId: string): Promise<MessageItem>
   abstract getResults (pid: string, limit: number): Promise<MessageItemMap>
   abstract getMessage (msgId: string): Promise<BundleItem>
   abstract getMessageByNonce (pid: string, nonce: number): Promise<BundleItem>

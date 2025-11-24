@@ -54,8 +54,8 @@ class HyMatrix extends HyMatrixBase {
     return result
   }
 
-  async getResult (msgId: string): Promise<MessageItem> {
-    const result = await getResult(this._apiHost, msgId)
+  async getResult (processId: string, msgId: string): Promise<MessageItem> {
+    const result = await getResult(this._apiHost, processId, msgId)
     return result
   }
 

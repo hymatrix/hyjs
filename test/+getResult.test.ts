@@ -4,8 +4,9 @@ const hyMatrix = new HyMatrix()
 
 describe('test', () => {
   test('getResult', async () => {
+    const pid = ''
     const msgId = 'OnTyG5YOkBmCrS_3OCUvnQ3H2D-YF0yMAru0uuQMrFY'
-    return await hyMatrix.getResult(msgId).then((result) => {
+    return await hyMatrix.getResult(pid,msgId).then((result) => {
       expect(typeof result.Nonce).toBe('string')
       expect(typeof result['Item-Id']).toBe('string')
       expect(typeof result['From-Process']).toBe('string')
