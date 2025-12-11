@@ -22,9 +22,13 @@
 * GET [/nodesByProcess/{processId}](#getnodesbyprocessprocessid)
 * GET [/balanceof/{accid}](#balanceofaccid)
 * GET [/stakeof/{accid}](#stakeofaccid)
+* GET [/cache/{pid}/{key}](#stakeofaccid)
+* GET [/modules](#stakeofaccid)
+* GET [/module/{mid}](#stakeofaccid)
 ## 操作类
 
 * POST [/](#sendmessageparams)
+* GET [/trysend/](#stakeofaccid)
   
 # 快速入门
 
@@ -555,6 +559,92 @@ hyMatrix.stakeOf().then(console.log)
 
 // "0"
 ```
+
+### getCacheByPidAndKey(pid,key)
+
+| 方法         | 描述           | 参数                  | 返回值           |
+|--------------|----------------|------------------------|------------------|
+| `getCacheByPidAndKey()`  | 通过 processId 获取 key 关键字的信息 | `pid: string, key: string`       | `string`|
+
+```ts
+const accid = '0xCD1Ef67a57a7c03BFB05F175Be10e3eC79821138'
+const hyMatrix = new HyMatrix({
+  accid: accid,
+  debug: true
+})
+const processId = '32Qj4T7mnk9DiAv5tSioZ5acXHxk07JOfpKV29e24P0'
+const key = 'TokenInfo'
+hyMatrix.getCacheByPidAndKey(processId,key).then(console.log)
+
+// "{\"Denomination\":\"12\",\"Description\":\"aox test points\",\"Logo\":\"TmjfR6zFg28defLIgyEElM3hMQBI2dBfm0Foi4ofIQM\",\"MaxSupply\":\"0\",\"MintOwner\":\"0x4002ED1a1410aF1b4930cF6c479ae373dEbD6223\",\"Name\":\"AOX Test Points\",\"Owner\":\"0x4002ED1a1410aF1b4930cF6c479ae373dEbD6223\",\"Ticker\":\"TAOX\"}"
+```
+
+### getModules()
+
+| 方法         | 描述           | 参数                  | 返回值           |
+|--------------|----------------|------------------------|------------------|
+| `getModules()`  | 获取 modules 列表 | ``       | `string[]`|
+
+```ts
+const accid = '0xCD1Ef67a57a7c03BFB05F175Be10e3eC79821138'
+const hyMatrix = new HyMatrix({
+  accid: accid,
+  debug: true
+})
+
+hyMatrix.getModules().then(console.log)
+
+// [
+// "web.vmdocker-golua-ao.v0.0.1",
+// "hymx.basic.token.0.0.1",
+// "hymx.crosschain.token.0.0.1",
+// "hymx.core.token.0.0.0",
+// "hymx.core.registry.0.0.0"
+// ]
+```
+
+### getModule(mid)
+
+| 方法         | 描述           | 参数                  | 返回值           |
+|--------------|----------------|------------------------|------------------|
+| `getModule()`  | 通过 mid 获取 module 信息 | `mid: string`       | `Module`|
+
+```ts
+const accid = '0xCD1Ef67a57a7c03BFB05F175Be10e3eC79821138'
+const hyMatrix = new HyMatrix({
+  accid: accid,
+  debug: true
+})
+const mid = ''
+
+hyMatrix.getModule(mid).then(console.log)
+
+// {}
+```
+
+### trySend(params:TrySendRequest)
+
+| 方法         | 描述           | 参数                  | 返回值           |
+|--------------|----------------|------------------------|------------------|
+| `trySend()`  | 触发指定流程和目标的发件箱发送（尽力而为）。 | `{pid: string, target: string}`       | `ok`|
+
+```ts
+const accid = '0xCD1Ef67a57a7c03BFB05F175Be10e3eC79821138'
+const hyMatrix = new HyMatrix({
+  accid: accid,
+  debug: true
+})
+const params = {
+  pid: '',
+  target: ''
+}
+
+hyMatrix.trySend(params).then(console.log)
+
+// 'ok'
+```
+
+
 
 ### sendMessage(params)
 
