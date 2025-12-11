@@ -12,7 +12,8 @@ import {
   HMNodeMap,
   HMNode,
   MessageItemMap,
-  Module
+  Module,
+  TrySendRequest
 } from './types'
 
 import {
@@ -32,7 +33,8 @@ import {
   getProcesses,
   getCacheByPidAndKey,
   getModuleByMid,
-  getModules
+  getModules,
+  trySend
 } from './api/api'
 import { createAndSignItem } from './lib'
 import { getDefaultBase, mergeTags, baseToTags } from './utils'
@@ -150,6 +152,11 @@ class HyMatrix extends HyMatrixBase {
 
   async getModule (mid: string): Promise<Module> {
     const result = await getModuleByMid(this._apiHost, mid)
+    return result
+  }
+
+  async trySend (params: TrySendRequest): Promise<string> {
+    const result = await trySend(this._apiHost, params)
     return result
   }
 

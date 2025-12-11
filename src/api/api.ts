@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import isObject from 'lodash/isObject'
 import isString from 'lodash/isString'
 import { stringify as qsStringify } from 'query-string'
-import { MessageItem, BundleItem, ResponseResult, HMInfo, HMNodeMap, HMNode, MessageItemMap, Module } from '../types/index'
+import { MessageItem, BundleItem, ResponseResult, HMInfo, HMNodeMap, HMNode, MessageItemMap, Module, TrySendRequest } from '../types/index'
 import { toBN } from '../utils'
 
 // `validateStatus` defines whether to resolve or reject the promise for a given
@@ -217,4 +217,15 @@ export const getModuleByMid = async (apiHost: string, mid: string): Promise<Modu
     method: 'GET'
   })
   return result.data
+}
+
+export const trySend = async (apiHost: string, params: TrySendRequest): Promise<string> => {
+  const url = `${apiHost}/trysend`
+  const result = await sendRequest({
+    ...rConfig,
+    url,
+    method: 'POST',
+    data: params
+  })
+  return result.status === 200 ? 'ok' : result.data
 }

@@ -165,6 +165,10 @@ export interface SendMessageParams {
 //   tags: Tag[]
 //   data?: string
 // }
+export interface TrySendRequest {
+  pid: string
+  target: string
+}
 
 export abstract class HyMatrixBase {
   abstract info (): Promise<HMInfo>
@@ -184,4 +188,5 @@ export abstract class HyMatrixBase {
   abstract getCacheByPidAndKey (pid: string, key: string): Promise<string>
   abstract getModules (): Promise<string[]>
   abstract getModule (mid: string): Promise<Module>
+  abstract trySend (params: TrySendRequest): Promise<string>
 }
