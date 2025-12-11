@@ -22,13 +22,13 @@
 * GET [/nodesByProcess/{processId}](#getnodesbyprocessprocessid)
 * GET [/balanceof/{accid}](#balanceofaccid)
 * GET [/stakeof/{accid}](#stakeofaccid)
-* GET [/cache/{pid}/{key}](#stakeofaccid)
-* GET [/modules](#stakeofaccid)
-* GET [/module/{mid}](#stakeofaccid)
+* GET [/cache/{pid}/{key}](#getcachebypidandkeypidkey)
+* GET [/modules](#getmodules)
+* GET [/module/{mid}](#getmodulemid)
 ## 操作类
 
 * POST [/](#sendmessageparams)
-* GET [/trysend/](#stakeofaccid)
+* POST [/trysend/](#trysendparamstrysendrequest)
   
 # 快速入门
 
