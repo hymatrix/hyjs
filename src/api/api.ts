@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import isObject from 'lodash/isObject'
 import isString from 'lodash/isString'
 import { stringify as qsStringify } from 'query-string'
-import { MessageItem, BundleItem, ResponseResult, HMInfo, HMNodeMap, HMNode, MessageItemMap } from '../types/index'
+import { MessageItem, BundleItem, ResponseResult, HMInfo, HMNodeMap, HMNode, MessageItemMap, Module } from '../types/index'
 import { toBN } from '../utils'
 
 // `validateStatus` defines whether to resolve or reject the promise for a given
@@ -54,7 +54,7 @@ export const getInfo = async (apiHost: string): Promise<HMInfo> => {
   })
   return result.data
 }
-export const getResult = async (apiHost: string,processId: string, msgId: string): Promise<MessageItem> => {
+export const getResult = async (apiHost: string, processId: string, msgId: string): Promise<MessageItem> => {
   const url = `${apiHost}/result/${processId}/${msgId}`
   const result = await sendRequest({
     ...rConfig,
@@ -185,6 +185,36 @@ export const send = async (apiHost: string, data: ArrayBuffer): Promise<Response
     url,
     method: 'POST',
     data
+  })
+  return result.data
+}
+
+export const getCacheByPidAndKey = async (apiHost: string, pid: string, key: string): Promise<string> => {
+  const url = `${apiHost}/cache/${pid}/${key}`
+  const result = await sendRequest({
+    ...rConfig,
+    url,
+    method: 'GET'
+  })
+  return result.data
+}
+
+export const getModules = async (apiHost: string): Promise<string[]> => {
+  const url = `${apiHost}/modules`
+  const result = await sendRequest({
+    ...rConfig,
+    url,
+    method: 'GET'
+  })
+  return result.data
+}
+
+export const getModuleByMid = async (apiHost: string, mid: string): Promise<Module> => {
+  const url = `${apiHost}/module/${mid}`
+  const result = await sendRequest({
+    ...rConfig,
+    url,
+    method: 'GET'
   })
   return result.data
 }

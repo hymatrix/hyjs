@@ -11,7 +11,8 @@ import {
   Response,
   HMNodeMap,
   HMNode,
-  MessageItemMap
+  MessageItemMap,
+  Module
 } from './types'
 
 import {
@@ -28,7 +29,10 @@ import {
   send,
   getNode,
   getNodesByProcess,
-  getProcesses
+  getProcesses,
+  getCacheByPidAndKey,
+  getModuleByMid,
+  getModules
 } from './api/api'
 import { createAndSignItem } from './lib'
 import { getDefaultBase, mergeTags, baseToTags } from './utils'
@@ -132,6 +136,21 @@ class HyMatrix extends HyMatrixBase {
     })
     const result = await send(this._apiHost, binary)
     return { id: result.id }
+  }
+
+  async getCacheByPidAndKey (pid: string, key: string): Promise<string> {
+    const result = await getCacheByPidAndKey(this._apiHost, pid, key)
+    return result
+  }
+
+  async getModules (): Promise<string[]> {
+    const modules = await getModules(this._apiHost)
+    return modules
+  }
+
+  async getModule (mid: string): Promise<Module> {
+    const result = await getModuleByMid(this._apiHost, mid)
+    return result
   }
 
   // private async initToken (tokenModule: string, Base: Base, tags: Tag[]): Promise<string> {

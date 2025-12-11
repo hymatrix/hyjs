@@ -168,7 +168,7 @@ export interface SendMessageParams {
 
 export abstract class HyMatrixBase {
   abstract info (): Promise<HMInfo>
-  abstract getResult (pid: string,msgId: string): Promise<MessageItem>
+  abstract getResult (pid: string, msgId: string): Promise<MessageItem>
   abstract getResults (pid: string, limit: number): Promise<MessageItemMap>
   abstract getMessage (msgId: string): Promise<BundleItem>
   abstract getMessageByNonce (pid: string, nonce: number): Promise<BundleItem>
@@ -181,4 +181,7 @@ export abstract class HyMatrixBase {
   abstract balanceOf (accid?: string): Promise<string>
   abstract stakeOf (accid?: string): Promise<string>
   abstract sendMessage (params: SendMessageParams): Promise<Response>
+  abstract getCacheByPidAndKey (pid: string, key: string): Promise<string>
+  abstract getModules (): Promise<string[]>
+  abstract getModule (mid: string): Promise<Module>
 }
